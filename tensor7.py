@@ -29,6 +29,7 @@ shuffle_index = np.random.permutation(60000)
 # print(len(shuffle_index))
 X_train, y_train = X_train[shuffle_index], y_train[shuffle_index]
 
+# print (y[26301])
 # 这个“数字 5 检测器”就是一个二分类器，能够识别两类别，“是 5”和“非 5”。让我们为这个分类任务创建目标向量：
 
 
@@ -36,10 +37,15 @@ y_train_5 = (y_train == 5) # True for all 5s, False for all other digits.
 y_test_5 = (y_test == 5)
 
 # print(y_train_5)
+
 from sklearn.linear_model import SGDClassifier
 
 sgd_clf = SGDClassifier(random_state=42)
 # 多类分类
 sgd_clf.fit(X_train, y_train)
 
-print (sgd_clf.predict([X[16000]]))
+my_digit = X[26301]
+
+print (sgd_clf.predict([my_digit]))
+
+print (sgd_clf.decision_function([my_digit]))
