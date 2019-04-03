@@ -1,4 +1,5 @@
 # import tensorflow as tf
+# dnn 神经网络
 import os 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' 
 
