@@ -11,9 +11,9 @@ import matplotlib.pyplot as plt # plt 用于显示图片
 from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets("MNIST_data/",one_hot=True)
 
-from mnist import MNIST
+# from mnist import MNIST
 
-mndata = MNIST(path='MNIST_data/',gz=True)
+# mndata = MNIST(path='MNIST_data/',gz=True)
 
 # x = tf.placeholder("float", [None, 784])  # x定义为占位符，待计算图运行的时候才去读取数据图片
 # W = tf.Variable(tf.zeros([784, 10]))      # 权重w初始化为0
@@ -38,26 +38,53 @@ mndata = MNIST(path='MNIST_data/',gz=True)
 # save_path = saver.save(sess, "./mnistsoftmax/my_model_final.ckpt")
 
 # import cv2 
-images, labels = mndata.load_testing()
-num = 8000
-image = images[num]
-label = labels[num]
-# 打印图片
-print(mndata.display(image))
-print('这张图片的实际数字是: ' + str(label))
+# images, labels = mndata.load_testing()
+# num = 8000
+# image = images[num]
+# label = labels[num]
+# # 打印图片
+# print(mndata.display(image))
+# print('这张图片的实际数字是: ' + str(label))
 
+def inverse_color(image):
+
+    height,width = image.shape
+    img2 = image.copy()
+
+    for i in range(height):
+        for j in range(width):
+            img2[i,j] = (255-image[i,j]) 
+    return img2
 # 测试新图片，并输出预测值
-mp = mpimg.imread('./1.png')
-a = mp.reshape(1, 784,-1)
+# mp = mpimg.imread('./1.png')
 
-plt.imshow(a) # 显示图片
-plt.axis('off') # 不显示坐标轴
+_im = mnist.train.images[1,:]
+print(_im.shape)
+_im = _im.reshape(28,28)
+print(_im.shape)
+
+# img_gray = cv2.imread('./1.png')
+# img_gray = cv2.cvtColor(img_gray, cv2.COLOR_BGR2GRAY)
+# mp = tf.cast(mp, tf.float32)
+# a = mp.reshape(1, 784)
+# cv2.imshow('1',img_gray)
+# plt.imshow(img_gray) # 显示图片
+# plt.axis('off') # 不显示坐标轴
+# plt.show()
+
+plt.figure()
+plt.imshow(_im)
 plt.show()
 
 
-print(a)
+
+
+# print(mp.reshape(-1).shape)
+# print(np.array(image).reshape(1, 784))
+# print(img_gray)
+
 # y = tf.nn.softmax(y)  # 为了打印出预测值，我们这里增加一步通过softmax函数处理后来输出一个向量
-# result = sess.run(y, feed_dict={x: a})  # result是一个向量，通过索引来判断图片数字
+# result = sess.run(y, feed_dict={x: img_gray})  # result是一个向量，通过索引来判断图片数字
 # print('预测值为：')
 # print(result)
 
