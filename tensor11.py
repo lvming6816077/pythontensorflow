@@ -32,11 +32,12 @@ from PIL import Image, ImageFilter
 import tensorflow as tf
 
 def imageprepare():
-    file_name = './2.png'  # 图片路径
+    file_name = './5.png'  # 图片路径
     myimage = Image.open(file_name).convert('L')  # 转换成灰度图
     tv = list(myimage.getdata())  # 获取像素值
     # 转换像素范围到[0 1], 0是纯白 1是纯黑
     tva = [(255-x)*1.0/255.0 for x in tv] 
+    
     return tva
 
 result = imageprepare()
